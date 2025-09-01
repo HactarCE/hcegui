@@ -7,7 +7,7 @@
 //! - Multiple separate drag-and-drop environments can coexist and even overlap
 //!   in the same UI
 //!
-//! # Example
+//! # Examples
 //!
 //! ```
 //! # egui::__run_test_ui(|ui| {
@@ -23,6 +23,9 @@
 //! }
 //! # });
 //! ```
+//!
+//! For more advanced examples, see
+//! [`bin/demo/reorder.rs`](https://github.com/HactarCE/hcegui/blob/main/src/bin/demo/reorder.rs).
 
 use std::hash::Hash;
 

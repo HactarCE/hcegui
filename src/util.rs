@@ -1,4 +1,9 @@
 //! Miscellaneous helper functions.
+//!
+//! # Examples
+//!
+//! See
+//! [`bin/demo/util.rs`](https://github.com/HactarCE/hcegui/blob/main/src/bin/demo/util.rs).
 
 /// Displays UI in a wrapping layout, pushing this widget onto the next line if
 /// it cannot be displayed on the current line without wrapping.

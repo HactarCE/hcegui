@@ -1,11 +1,13 @@
 //! Demo crate.
 
 mod reorder;
+mod util;
 
 #[derive(Debug, Default, Copy, Clone, PartialEq, Eq, Hash)]
 enum Panel {
     #[default]
     Reorder,
+    Util,
 }
 
 fn main() -> eframe::Result {
@@ -21,7 +23,7 @@ fn main() -> eframe::Result {
                 egui::Sides::new().show(
                     ui,
                     |ui| {
-                        for panel in [Panel::Reorder] {
+                        for panel in [Panel::Reorder, Panel::Util] {
                             ui.selectable_value(&mut current_panel, panel, format!("{panel:?}"));
                         }
                     },
@@ -30,6 +32,7 @@ fn main() -> eframe::Result {
                 ui.separator();
                 match current_panel {
                     Panel::Reorder => reorder_demo.show(ui),
+                    Panel::Util => util::UtilDemo::show(ui),
                 }
             });
         },
