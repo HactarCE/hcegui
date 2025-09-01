@@ -76,17 +76,12 @@ impl ReorderDemo {
             ui.heading("Reorder with no handles");
             let mut dnd = reorder::Dnd::new(ui.ctx(), "keyboard_layouts");
             let is_dragging = dnd.is_dragging();
-            let dragging_id = dnd.payload_id();
             for (i, &(name, details)) in self.keyboard_layouts.iter().enumerate() {
-                dnd.reorderable(ui, i, |ui, id| {
+                dnd.reorderable(ui, i, |ui, _| {
                     let r = egui::CollapsingHeader::new(name)
                         .open(is_dragging.then_some(false))
                         .show(ui, |ui| ui.code(details));
-                    if dragging_id == Some(id) {
-                        (r.header_response.highlight(), ())
-                    } else {
-                        (r.header_response, ())
-                    }
+                    (r.header_response, ())
                 });
             }
             if let Some(r) = dnd.finish(ui).if_done_dragging() {

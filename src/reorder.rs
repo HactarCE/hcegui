@@ -211,7 +211,7 @@ impl<Payload, Target> Dnd<Payload, Target> {
             let r = ui.scope(|ui| ui.push_id(id, |ui| add_contents(ui)).inner);
             let (drag_handle_response, return_value) = r.inner;
 
-            // Check that the drag handle detects drags
+            // Ensure that the drag handle detects drags
             let drag_handle_response = drag_handle_response.interact(egui::Sense::drag());
 
             if !drag_handle_response.sense.senses_click() && drag_handle_response.hovered() {
@@ -235,6 +235,10 @@ impl<Payload, Target> Dnd<Payload, Target> {
     }
 
     /// Adds a new draggable object, using `payload` for the ID.
+    ///
+    /// `add_contents` takes the [`egui::Ui`] and the ID of the current
+    /// draggable element. If it is equal to [`Dnd::payload_id()`], then the
+    /// current element is being dragged.
     ///
     /// The first value returned by `add_contents` is used as the response for
     /// the drag handle, which may be any widget or region that does not use
@@ -385,7 +389,7 @@ impl<Payload, Target> Dnd<Payload, Target> {
     }
 }
 
-impl<Payload, Target: Clone> Dnd<Payload, (Target, BeforeOrAfter)> {
+impl<Payload, Target: Clone, BA: From<BeforeOrAfter>> Dnd<Payload, (Target, BA)> {
     /// Creates a new reorder drop zone before and after `r`.
     pub fn reorder_drop_zone_before_after(
         &mut self,
@@ -410,13 +414,13 @@ impl<Payload, Target: Clone> Dnd<Payload, (Target, BeforeOrAfter)> {
             line_endpoints: [tl, if dir.is_horizontal() { dl } else { tr }],
             clip_rect,
             direction: dir,
-            target: (target.clone(), BeforeOrAfter::Before),
+            target: (target.clone(), BeforeOrAfter::Before.into()),
         });
         self.reorder_drop_zones.push(ReorderTarget {
             line_endpoints: [if dir.is_horizontal() { tr } else { dl }, dr],
             clip_rect,
             direction: dir,
-            target: (target, BeforeOrAfter::After),
+            target: (target, BeforeOrAfter::After.into()),
         });
     }
 }
