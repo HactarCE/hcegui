@@ -506,7 +506,7 @@ impl<Payload, Target> DndResponse<Payload, Target> {
 }
 
 /// Drag-and-drop for reordering a sequence.
-pub type ReorderDnd = Dnd<usize, (usize, BeforeOrAfter)>;
+pub type ReorderDnd<I = usize> = Dnd<I, (I, BeforeOrAfter)>;
 
 /// Drag-and-drop move.
 #[derive(Debug, Default, Copy, Clone, PartialEq, Eq, Hash)]
@@ -524,7 +524,7 @@ impl<Payload, Target> DndMove<Payload, Target> {
 }
 
 /// Drag-and-drop move for reordering a sequence.
-pub type ReorderDndMove = DndMove<usize, (usize, BeforeOrAfter)>;
+pub type ReorderDndMove<I = usize> = DndMove<I, (I, BeforeOrAfter)>;
 impl ReorderDndMove {
     /// Returns the `i` and `j` such that the element at index `i` should shift
     /// to index `j`.
