@@ -38,8 +38,12 @@ eframe = { version = "0.32", optional = true }        # used for demo
 
 [features]
 dnd = []
-all = ["dnd", "dep:eframe"]
+all = ["dnd"]
+demo = ["all", "dep:eframe"]
 
 [[bin]]
 name = "demo"
-required-features = ["all"]
+required-features = ["demo"]
+
+[package.metadata.docs.rs]
+features = ["all"]

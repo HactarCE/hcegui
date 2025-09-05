@@ -16,4 +16,4 @@ By default, all feature flags are disabled.
 
 ## Demo
 
-Run `cargo run -F all` to see the demo app.
+Run `cargo run -F demo` to see the demo app.
