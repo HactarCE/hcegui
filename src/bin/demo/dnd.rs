@@ -1,15 +1,15 @@
 #![allow(missing_docs)]
 
 use egui::Widget;
-use hcegui::reorder;
+use hcegui::dnd;
 
-pub struct ReorderDemo {
+pub struct DndDemo {
     keyboard_layouts: Vec<(&'static str, &'static str)>,
     poem: Vec<&'static str>,
     list_of_lists: Vec<Vec<&'static str>>,
 }
 
-impl Default for ReorderDemo {
+impl Default for DndDemo {
     fn default() -> Self {
         Self {
             keyboard_layouts: vec![
@@ -51,7 +51,7 @@ impl Default for ReorderDemo {
     }
 }
 
-impl ReorderDemo {
+impl DndDemo {
     pub fn show(&mut self, ui: &mut egui::Ui) {
         ui.style_mut().interaction.selectable_labels = false;
         ui.style_mut().spacing.scroll = egui::style::ScrollStyle::solid();
@@ -62,7 +62,7 @@ impl ReorderDemo {
 
             // Reordering with handles
             ui.heading("Reorder with handles");
-            let mut dnd = reorder::Dnd::new(ui.ctx(), "poem");
+            let mut dnd = dnd::Dnd::new(ui.ctx(), "poem");
             for (i, &poem_line) in self.poem.iter().enumerate() {
                 dnd.reorderable_with_handle(ui, i, |ui, _| ui.label(poem_line));
             }
@@ -74,7 +74,7 @@ impl ReorderDemo {
 
             // Reordering with no handles
             ui.heading("Reorder with no handles");
-            let mut dnd = reorder::Dnd::new(ui.ctx(), "keyboard_layouts");
+            let mut dnd = dnd::Dnd::new(ui.ctx(), "keyboard_layouts");
             let is_dragging = dnd.is_dragging();
             for (i, &(name, details)) in self.keyboard_layouts.iter().enumerate() {
                 dnd.reorderable(ui, i, |ui, _| {
@@ -98,8 +98,8 @@ impl ReorderDemo {
 }
 
 fn show_list_of_lists_demo(ui: &mut egui::Ui, lists: &mut Vec<Vec<&'static str>>) {
-    let mut row_dnd = reorder::Dnd::new(ui.ctx(), "rows");
-    let mut item_dnd = reorder::Dnd::new(ui.ctx(), "items");
+    let mut row_dnd = dnd::Dnd::new(ui.ctx(), "rows");
+    let mut item_dnd = dnd::Dnd::new(ui.ctx(), "items");
     let mut index_to_delete = None;
 
     // Display items
@@ -127,7 +127,7 @@ fn show_list_of_lists_demo(ui: &mut egui::Ui, lists: &mut Vec<Vec<&'static str>>
                 });
             let r = ui.interact(r.inner_rect, r.id.with(1), egui::Sense::empty());
             if list.is_empty() {
-                item_dnd.drop_zone(ui, &r, ((i, None), reorder::BeforeOrAfter::Before));
+                item_dnd.drop_zone(ui, &r, ((i, None), dnd::BeforeOrAfter::Before));
             }
         });
     }
@@ -142,13 +142,13 @@ fn show_list_of_lists_demo(ui: &mut egui::Ui, lists: &mut Vec<Vec<&'static str>>
         if i1 == i2
             && let Some(j2) = j2
         {
-            reorder::DndMove::new(j1, (j2, placement)).reorder(&mut lists[i1]);
+            dnd::DndMove::new(j1, (j2, placement)).reorder(&mut lists[i1]);
         } else {
             let elem = lists[i1].remove(j1);
             if let Some(j2) = j2 {
                 let j2 = match placement {
-                    reorder::BeforeOrAfter::Before => j2,
-                    reorder::BeforeOrAfter::After => j2 + 1,
+                    dnd::BeforeOrAfter::Before => j2,
+                    dnd::BeforeOrAfter::After => j2 + 1,
                 };
                 lists[i2].insert(j2, elem);
             } else {

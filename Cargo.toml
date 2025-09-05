@@ -37,9 +37,9 @@ egui = { version = "0.32", default-features = false }
 eframe = { version = "0.32", optional = true }        # used for demo
 
 [features]
-reorder = []
-demo = ["reorder", "dep:eframe"]
+dnd = []
+all = ["dnd", "dep:eframe"]
 
 [[bin]]
 name = "demo"
-required-features = ["demo"]
+required-features = ["all"]

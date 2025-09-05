@@ -4,8 +4,11 @@ HactarCE's egui utilities.
 
 ## Features
 
-- Reordering
+- Flexible, high-level drag-and-drop API (`dnd` feature flag)
+- Miscellaneous utility functions (always enabled)
+
+By default, all feature flags are disabled.
 
 ## Demo
 
-Run `cargo run --bin demo --features demo` to see the demo app
+Run `cargo run -F all` to see the demo app.

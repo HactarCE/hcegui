@@ -1,5 +1,5 @@
 //! HactarCE's egui utilities.
 
-#[cfg(feature = "reorder")]
-pub mod reorder;
+#[cfg(feature = "dnd")]
+pub mod dnd;
 pub mod util;
