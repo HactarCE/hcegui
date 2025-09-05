@@ -1,4 +1,4 @@
-//! Flexible API for drag-and-drop and reordering.
+//! Flexible API for drag-and-drop and reordering. **Requires `dnd` feature.**
 //!
 //! - Any UI widget or layout can be made draggable
 //! - Any UI widget or layout can be given a handle for dragging

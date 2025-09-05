@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+
+- Docs now mention which feature flag to enable
+
 ## 0.1.1 - 2025-09-04
 
 ### Changed
