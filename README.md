@@ -9,6 +9,7 @@ HactarCE's egui utilities.
 
 ## Features
 
+- Label that supports ANSI escape codes (`ansi` feature flag)
 - Flexible, high-level drag-and-drop API (`dnd` feature flag)
 - Miscellaneous utility functions (always enabled)
 
