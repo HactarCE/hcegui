@@ -37,8 +37,9 @@ egui = { version = "0.32", default-features = false }
 eframe = { version = "0.32", optional = true }        # used for demo
 
 [features]
+ansi = []
 dnd = []
-all = ["dnd"]
+all = ["ansi", "dnd"]
 demo = ["all", "dep:eframe"]
 
 [[bin]]
