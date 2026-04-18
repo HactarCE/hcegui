@@ -16,11 +16,11 @@ fn main() -> eframe::Result {
     let mut dnd_demo = dnd::DndDemo::default();
     let mut util_demo = util::UtilDemo::default();
 
-    eframe::run_simple_native(
+    eframe::run_ui_native(
         "egui_reorder demo",
         eframe::NativeOptions::default(),
-        move |ctx, _frame| {
-            egui::CentralPanel::default().show(ctx, |ui| {
+        move |ui, _frame| {
+            egui::CentralPanel::default().show_inside(ui, |ui| {
                 egui::Sides::new().show(
                     ui,
                     |ui| {
